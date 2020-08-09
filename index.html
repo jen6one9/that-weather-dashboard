@@ -20,18 +20,19 @@
             <h1 class="display-3">The Weather Dashboard</h1>
             <p class="lead">Keep track of your 5 day weather outlook</p>
         </header>
+
         <div class id="content">
             <section class="form-group">
                 <label for="search">Search for a City:</label>
                 <input type="text" class="form control" id="search-text">
             </section>
 
-            <div class id="content">
-                    <div class="city"></div>
-                    <div class="wind"></div>
-                    <div class="humidity"></div>
-                    <div class="temp"></div>
-                    <div class="UV Index"></div>
+        <div class id="weather container">
+            <div class="city"></div>
+            <div class="wind"></div>
+            <div class="humidity"></div>
+            <div class="temp"></div>
+            <div class="UV Index"></div>
             </div>
 
             <h3>5-Day Forecast:</h3>
@@ -40,17 +41,22 @@
                     src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
                     alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">Name of last searched City here</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                         card's content.</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-
+                </div>              
             </div>
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-            <script src="script.js"></script>
-        </div>
+         </div>
+
+         <footer class="footer">
+            <h6 class="text-center">&copy: 2020 Jeneth Diesta <i class="fas fa-heart"></i></h6>
+            </footer>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="script.js"></script>
 </body>
 
 </html>
