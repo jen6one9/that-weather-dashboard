@@ -11,13 +11,17 @@ p {
 
 h3 {
     text-align: center;
-    padding: 10px;
-    margin: 10px;
+
 }
 
 section {
   text-align: left;
   padding: 10px;
   margin: 10px;
+
+}
+
+button {
+  text-align: center;
 
 }
