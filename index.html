@@ -24,17 +24,29 @@
 <!-- must display the photo of the city input by user. We'll need proper logic for that -->
         <div class id="content">
             <section class="form-group">
-                <label for="search">Search for a city:</label>
-                <input type="text" class="form control" id="search-text">
+
+                <input type="text" id="userInput" onkeyup="myFunction()" placeholder="Search for a U.S. city">
                 <i class="fa fa-search" aria-hidden="true"></i>
+
+                <ul id="searchUL">
+                  <li><a href="#">Austin</a></li>
+                  <li><a href="#">Chicago</a></li>
+                
+                  <li><a href="#">New York</a></li>
+                  <li><a href="#">Orlando</a></li>
+                
+                  <li><a href="#">San Francisco</a></li>
+                  <li><a href="#">Denver</a></li>
+                  <li><a href="#">Las Vegas</a></li>
+                </ul>   
+
+
+
             </section>
 
             <div class="card" style="width: 40%;"> 
-                <img class="card-img-top"
-                    src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-                    alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Name of last searched City here</h5>
+                    <h5 class="card-title">Name of current city, state here</h5>
                     <h5 class="card-title">Current Date</h5>
                     <p class="card-text"></p>
                     <p>Temperature: </p>
@@ -45,6 +57,10 @@
                             <div class="UV Index">
                                 <button>Numeric value</button>
                             </div>
+                <img class="card-img-top"
+                    src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+                    alt="Card image cap">
+           
             
                     
                     <div class="city"></div>
@@ -112,7 +128,9 @@
           
         </div>
 
-    </container>     
+    </container>
+    
+    
 
 
    
