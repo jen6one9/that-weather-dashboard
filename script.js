@@ -22,7 +22,7 @@ function displayDate() {
     }
 
 
-    $("#searchBtn").on("click", function () {
+    $("#userInput").on("click", function () {
         var APIKey = "277c25e400c8e8f8bdc2d5b9d65d0ce7";
         var queryURL = "api.openweathermap.org/data/2.5/forecast?id={city ID}&appid=277c25e400c8e8f8bdc2d5b9d65d0ce7"
 
