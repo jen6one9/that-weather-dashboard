@@ -49,4 +49,9 @@ function displayDate() {
             $(".temp").text("Temperature (K) " + response.main.temp);
             $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
             console.log("Temperature (F): " + tempF);
+
+            let locationIcon = document.querySelector('.weather-icon');
+            const {icon} = data.weather[0];
+            locationIcon.innerHTML = <img src="icons/${icon}.png">;
+
         })
