@@ -1,6 +1,10 @@
 var APIKey = "277c25e400c8e8f8bdc2d5b9d65d0ce7";
 var queryURL = "https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7"
 
+var unsplash = "wHLfZa0Nwxi_wbFaG80xEQbQrNXdm4YBbdN008ZoSIg";
+var unsplashqueryURL = 'https://api.unsplash.com/search/photos?query' + city + "&APPID=wHLfZa0Nwxi_wbFaG80xEQbQrNXdm4YBbdN008ZoSIg";
+
+
 
 $(document).ready(function () {
     $("#userSearch").text(localStorage.getItem("city"))
@@ -26,11 +30,12 @@ $(document).ready(function () {
             console.log(apidata);
             var block = 1
             for (let i = 0; i < apidata.list.length; i = i + 8) {
-                $(`#${block}-weather`).text (apidata.list[i].weather[0].main)
-                $(`#${block}-date`).text (apidata.list[i].dt_txt)
-                $(`#${block}-temp`).text (apidata.list[i].main.temp)
-                $(`#${block}-humidity`).text (apidata.list[i].main.humidity)
-                $(`#${block}-speed`).text (apidata.list[i].wind.speed)
+                $(`#${block}-weather`).text(apidata.list[i].weather[0].main)
+                $(`#${block}-date`).text(apidata.list[i].dt_txt)
+                $(`#${block}-temp`).text(apidata.list[i].main.temp)  
+                $(`#${block}-humidity`).text(apidata.list[i].main.humidity) 
+                $(`#${block}-speed`).text(apidata.list[i].wind.speed)  
+
                 block++
             }
         })
@@ -47,7 +52,7 @@ $(document).ready(function () {
             console.log(apidata);
 
 
-            $(`#weather`).text("Weather:" + apidata.weather[0].main)
+            $(`#weather`).text("Weather: " + apidata.weather[0].main)
             $(`#current-date`).text(apidata.dt_txt)
             $(`#temp`).text(apidata.main.temp)
             $(`#humid`).text(apidata.main.humidity)
@@ -65,7 +70,10 @@ $(document).ready(function () {
             });
 
         })
-// create a sep function to call the unsplash api and return a city image based on user input
+
+
+        }
+        // create a sep function to call the unsplash api and return a city image based on user input
 
         // $('.city').html("<h1>" + response.name + "Weather Details</h1>");
         // $('.wind').text("Wind Speed: " + response.wind.speed);
@@ -87,7 +95,7 @@ $(document).ready(function () {
 
         // Need to display the UV index
 
-    }
+    
     // // get the date display from moments.js
     // function displayDate() {
     //     const currentDate = moment().format('dddd, MMMM DD, YYYY')
