@@ -26,11 +26,11 @@ $(document).ready(function () {
             console.log(apidata);
             var block = 1
             for (let i = 0; i < apidata.list.length; i = i + 8) {
-                $(`#${block}-weather`).text(apidata.list[i].weather[0].main)
-                $(`#${block}-date`).text(apidata.list[i].dt_txt)
-                $(`#${block}-temp`).text(apidata.list[i].main.temp)
-                $(`#${block}-humidity`).text(apidata.list[i].main.humidity)
-                $(`#${block}-speed`).text(apidata.list[i].wind.speed)
+                $(`#${block}-weather`).text (apidata.list[i].weather[0].main)
+                $(`#${block}-date`).text (apidata.list[i].dt_txt)
+                $(`#${block}-temp`).text (apidata.list[i].main.temp)
+                $(`#${block}-humidity`).text (apidata.list[i].main.humidity)
+                $(`#${block}-speed`).text (apidata.list[i].wind.speed)
                 block++
             }
         })
