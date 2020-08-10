@@ -1,5 +1,5 @@
 var APIKey = "277c25e400c8e8f8bdc2d5b9d65d0ce7";
-var queryURL = "http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7"
+var queryURL = "https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7"
 
 
 $(document).ready(function () {
@@ -9,7 +9,7 @@ $(document).ready(function () {
         console.log(city);
         if (city != '') {
             FivedayForecast(city)
-
+            showData(city)
         } else {
             $('#error').html('Field cannot be blank');
 
@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
     function FivedayForecast(city) {
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + "&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7",
+            url: 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + "&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7&units=imperial",
             method: "GET",
         }).then(function (apidata) {
             console.log(apidata);
@@ -37,35 +37,53 @@ $(document).ready(function () {
 
 
 
-    function showData(response) {
+    function showData(city) {
+        $.ajax({
+            url: 'https://api.openweathermap.org/data/2.5/weather?q=' + city + "&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7&units=imperial",
+            method: "GET",
+        }).then(function (apidata) {
+            console.log(apidata);
 
-        $('.city').html("<h1>" + response.name + "Weather Details</h1>");
-        $('.wind').text("Wind Speed: " + response.wind.speed);
-        console.log("Wind Speed: " + response.wind.speed);
-        $('.humidity').text("Humidity: " + response.main.humidity);
-        console.log("Humidity: " + response.main.humidity);
 
-        var tempF = (response.main.temp - 273.15) * 1.80 + 32
+            $(`#weather`).text("Weather:" + apidata.weather[0].main)
+            $(`#current-date`).text(apidata.dt_txt)
+            $(`#temp`).text(apidata.main.temp)
+            $(`#humid`).text(apidata.main.humidity)
+            $(`#wind`).text(apidata.wind.speed)
+            $("#current-weather").text(apidata.name)
+            var lat = apidata.coord.lat
+            var lon = apidata.coord.lon
+            let uv;
+            const uvIndex = `https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=277c25e400c8e8f8bdc2d5b9d65d0ce7`
+            $.ajax({
+                url: uvIndex,
+                method: "GET"
+            }).then(function (uvIndex) {
+                $("#UV").text(uvIndex.value)
+            });
 
-        $('.temp').text("Temperature (K) " + response.main.temp);
-        $('.tempF').text("Temperature (F) " + tempF.toFixed(2));
-        console.log("Temperature (F): " + tempF);
+        })
 
-        // Need to display the weather icon
+        // $('.city').html("<h1>" + response.name + "Weather Details</h1>");
+        // $('.wind').text("Wind Speed: " + response.wind.speed);
+        // console.log("Wind Speed: " + response.wind.speed);
+        // $('.humidity').text("Humidity: " + response.main.humidity);
+        // console.log("Humidity: " + response.main.humidity);
 
-        let weatherIcon = document.querySelector('.weather-icon');
-        const { icon } = data.weather[0];
-        locationIcon.innerHTML = `img src='icons/${icon}.png'`;
+        // var tempF = (response.main.temp - 273.15) * 1.80 + 32
+
+        // $('.temp').text("Temperature (K) " + response.main.temp);
+        // $('.tempF').text("Temperature (F) " + tempF.toFixed(2));
+        // console.log("Temperature (F): " + tempF);
+
+        // // Need to display the weather icon
+
+        // let weatherIcon = document.querySelector('.weather-icon');
+        // const { icon } = data.weather[0];
+        // locationIcon.innerHTML = `img src='icons/${icon}.png'`;
 
         // Need to display the UV index
-        let uv;
-        const uvIndex = `https://api.openweathermap.org/data/2.5/uvi?lat=${response.coord.lat}&lon=${response.coord.lon}&appid=277c25e400c8e8f8bdc2d5b9d65d0ce7`
-        $.ajax({
-            url: uvIndex,
-            method: "GET"
-        }).then(function (uvIndex) {
 
-        });
     }
     // // get the date display from moments.js
     // function displayDate() {
