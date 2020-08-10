@@ -1,57 +1,95 @@
-function displayDate() {
-    const currentDate = moment().format('dddd, MMMM DD, YYYY')
-    const currentDateEl = $("#currentDay");
-    currentDateEl.text(currentDate)
-    console.log("currentDate", currentDate)
+var APIKey = "277c25e400c8e8f8bdc2d5b9d65d0ce7";
+var queryURL = "http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7"
 
-    function myFunction() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("userInput");
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("searchUL");
-        li = ul.getElementsByTagName("li");
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName("a")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                li[i].style.display = "";
-            } else {
-                li[i].style.display = "none";
-            }
+
+$(document).ready(function () {
+    // once the user clicks on search, then call the api for weather data
+    $('#userInput').click(function () {
+        var city = $('#city').val();
+        console.log(city);
+        if (city != '') {
+            FivedayForecast(city)
+
+        } else {
+            $('#error').html('Field cannot be blank');
+
         }
+
+    });
+    function FivedayForecast(city) {
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + "&APPID=277c25e400c8e8f8bdc2d5b9d65d0ce7",
+            method: "GET",
+        }).then(function (apidata) {
+            console.log(apidata);
+            var block = 1
+            for (let i = 0; i < apidata.list.length; i = i + 8) {
+                $(`#${block}-weather`).text(apidata.list[i].weather[0].main)
+                $(`#${block}-date`).text(apidata.list[i].dt_txt)
+                $(`#${block}-temp`).text(apidata.list[i].main.temp)
+                $(`#${block}-humidity`).text(apidata.list[i].main.humidity)
+                $(`#${block}-speed`).text(apidata.list[i].wind.speed)
+                block++
+            }
+        })
+
     }
 
 
-    $("#userInput").on("click", function () {
-        var APIKey = "277c25e400c8e8f8bdc2d5b9d65d0ce7";
-        var queryURL = "api.openweathermap.org/data/2.5/forecast?id={city ID}&appid=277c25e400c8e8f8bdc2d5b9d65d0ce7"
 
+    function showData(response) {
+
+        $('.city').html("<h1>" + response.name + "Weather Details</h1>");
+        $('.wind').text("Wind Speed: " + response.wind.speed);
+        console.log("Wind Speed: " + response.wind.speed);
+        $('.humidity').text("Humidity: " + response.main.humidity);
+        console.log("Humidity: " + response.main.humidity);
+
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32
+
+        $('.temp').text("Temperature (K) " + response.main.temp);
+        $('.tempF').text("Temperature (F) " + tempF.toFixed(2));
+        console.log("Temperature (F): " + tempF);
+
+        // Need to display the weather icon
+
+        let weatherIcon = document.querySelector('.weather-icon');
+        const { icon } = data.weather[0];
+        locationIcon.innerHTML = `img src='icons/${icon}.png'`;
+
+        // Need to display the UV index
+        let uv;
+        const uvIndex = `https://api.openweathermap.org/data/2.5/uvi?lat=${response.coord.lat}&lon=${response.coord.lon}&appid=277c25e400c8e8f8bdc2d5b9d65d0ce7`
         $.ajax({
-            url: queryURL,
-            method: "GET",
+            url: uvIndex,
+            method: "GET"
+        }).then(function (uvIndex) {
 
-        }).then(function (response) {
+        });
+    }
+    // // get the date display from moments.js
+    // function displayDate() {
+    //     const currentDate = moment().format('dddd, MMMM DD, YYYY')
+    //     const today = $("#currentDay");
+    //     currentDateEl.text(currentDate)
+    //     console.log("currentDate", currentDate)
 
-            console.log(response);
+    //     // get input from the user    
+    //     function myFunction() {
+    //         var input, filter, ul, li, a, i, txtValue;
+    //         input = document.getElementById("userInput");
+    //         filter = input.value.toUpperCase();
+    //         ul = document.getElementById("searchUL");
+    //         li = ul.getElementsByTagName("li");
+    //         for (i = 0; i < li.length; i++) {
+    //             a = li[i].getElementsByTagName("a")[0];
+    //             txtValue = a.textContent || a.innerText;
+    //             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //                 li[i].style.display = "";
+    //             } else {
+    //                 li[i].style.display = "none";
+    //             }
+    //         }
+    //     
 
-            const results = response.respone.docs;
-            const weather = $('#results');
-            const temp = (response.main.temp - 273.15) * 1.80 + 32
-
-            $(".city").html("<h1>" + response.name + "Weather Details</h1>");
-            $(".wind").text("Wind Speed: " + response.wind.speed);
-            console.log("Wind Speed: " + response.wind.speed);
-            $(".humidity").text("Humidity: " + response.main.humidity);
-            console.log("Humidity: " + response.main.humidity);
-
-            var tempF = (response.main.temp - 273.15) * 1.80 + 32
-
-            $(".temp").text("Temperature (K) " + response.main.temp);
-            $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
-            console.log("Temperature (F): " + tempF);
-
-            let locationIcon = document.querySelector('.weather-icon');
-            const {icon} = data.weather[0];
-            locationIcon.innerHTML = <img src="icons/${icon}.png">;
-
-        })
+})

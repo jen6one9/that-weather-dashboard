@@ -10,6 +10,7 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <title>The Weather Dashboard</title>
 </head>
 
@@ -21,134 +22,119 @@
         </header>
 
 
-<!-- Added feature: must display the photo of the city input by user. We'll need proper logic for that -->
+        <!-- Added feature: must display the photo of the city input by user. We'll need proper logic for that -->
         <div class id="content">
             <section class="form-group">
 
-                <input type="text" id="userInput" onkeyup="userInput()" placeholder="Search for a U.S. city">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <input type="text" id="city">
+                <button id="userInput"> <i class="fa fa-search" aria-hidden="true"></i></button>
+                <span id="error"></span>
 
                 <ul id="searchUL">
-                  <li>Austin</a></li>
-                  <li>Chicago</a></li>
-                
-                  <li>New York</a></li>
-                  <li>Orlando</a></li>
-                
-                  <li>San Francisco</a></li>
-                  <li>Denver</a></li>
-                  <li>Las Vegas</a></li>
-                </ul>   
+                    <li>Austin</a></li>
+                    <li>Chicago</a></li>
 
+                    <li>New York</a></li>
+                    <li>Orlando</a></li>
 
+                    <li>San Francisco</a></li>
+                    <li>Denver</a></li>
+                    <li>Las Vegas</a></li>
+                </ul>
 
             </section>
 
-            <div class="card" style="width: 40%;"> 
+            <div class="card" style="width: 40%;">
                 <div class="card-body">
-                    <h5 class="card-title">Name of current city, state here</h5>
-                    <h5 class="card-title">Current Date</h5>
+                    <h3 class="card-title">Name of current city, state here</h3>
+                    <h3 class="card-title">Current Date</h3>
                     <p class="card-text"></p>
                     <p>Temperature: </p>
-                        <p>Humidity: </p>
-                        <p>Wind Speed: </p>
-                        <p>UV Index: </p>
-                        <div class="btn">
-                            <div class="UV Index">
-                                <button>Numeric value</button>
-                            </div>
-                <img class="card-img-top"
-                    src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-                    alt="Card image cap">
-           
-            
-                    
-                    <div class="city"></div>
-                    <div class="wind"></div>
-                    <div class="humidity"></div>
-                    <div class="temp"></div>
+                    <p>Humidity: </p>
+                    <p>Wind Speed: </p>
+                    <p>UV Index: </p>
+                    <div class="btn">
+                        <div class="UV Index"><button>Numeric value</button>
+                     
+                            <!-- UV index requires a function and the button needs to be styled based on UV index severity - 3 colors - red, yellow, green -->
+                        </div>
+                        <!-- Need photo to display of the current city.  Below is just a place holder for San Diego. Need to call the unsplash api to get this to auto populate. -->
+                        <img class="card-img-top"
+                            src="https://images.unsplash.com/photo-1505245208761-ba872912fac0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
+                            alt="Card image cap">
+
+                        <div class="city"></div>
+                        <div class="wind"></div>
+                        <div class="humidity"></div>
+                        <div class="temp"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
 
-    <container>
-        <h3>5-Day Forecast:</h3>
-    
-        <div class="card" style="width: 10%"
-             class="card-body">
-            <h class="card-title">Date Value</h>
-            <div class="weather-icon"><img src="icons/unknown.png" /></div>
-            <p class="card-text"></p>
-            <p>Temperature: </p>
-                <p>Humidity: </p>
-                <p>Wind Speed: </p>
-                <p>UV Index: </p>
-              
-            </div>
+            <container>
+                <h3>5-Day Forecast:</h3>
 
-            <div class="card" style="width: 10%"
-            class="card-body">
-           <h class="card-title">Date Value</h>
-           <div class="weather-icon"><img src="icons/unknown.png" /></div>
-           <p class="card-text"></p>
-           <p>Temperature: </p>
-               <p>Humidity: </p>
-               <p>Wind Speed: </p>
-               <p>UV Index: </p>
-             
-           </div>
-           <div class="card" style="width: 10%"
-           class="card-body">
-          <h class="card-title">Date Value</h>
-          <div class="weather-icon"><img src="icons/unknown.png" /></div>
-          <p class="card-text"></p>
-          <p>Temperature: </p>
-              <p>Humidity: </p>
-              <p>Wind Speed: </p>
-              <p>UV Index: </p>
-            
-          </div>
-          <div class="card" style="width: 10%"
-          class="card-body">
-         <h class="card-title">Date Value</h>
-         <div class="weather-icon"><img src="icons/unknown.png" /></div>
-         <p class="card-text"></p>
-         <p>Temperature: </p>
-             <p>Humidity: </p>
-             <p>Wind Speed: </p>
-             <p>UV Index: </p>
-           
-         </div>
+                <div class="card" style="width: 10%" class="card-body">
+                    <h3 class="card-title" id="1-date">Date Va</h3>
+                    <!-- <div class="weather-icon"><img src="icons/unknown.png" /></div> -->
+                    <p class="card-text"></p>
+                    <p>Temperature:<span id="1-temp"></span> </p>
+                    <p>Humidity:<span id="1-humidity"></span> </p>
+                    <p>Wind Speed:<span id="1-speed"></span> </p>
+                    <p>Weather:<span id="1-weather"></span> </p>
 
-         <div class="card" style="width: 10%"
-         class="card-body">
-        <h class="card-title">Date Value</h>
-        <div class="weather-icon"><img src="icons/unknown.png" /></div>
-        <p class="card-text"></p>
-        <p>Temperature: </p>
-            <p>Humidity: </p>
-            <p>Wind Speed: </p>
-            <p>UV Index: </p>
-          
-        </div>
+                </div>
 
-    </container>
-    
-    
+                <div class="card" style="width: 10%" class="card-body">
+                    <h3 class="card-title" id="2-date">Date Va</h3>
+                    <!-- <div class="weather-icon"><img src="icons/unknown.png" /></div> -->
+                    <p class="card-text"></p>
+                    <p>Temperature:<span id="2-temp"></span> </p>
+                    <p>Humidity:<span id="2-humidity"></span> </p>
+                    <p>Wind Speed:<span id="2-speed"></span> </p>
+                    <p>Weather:<span id="2-weather"></span> </p>
 
 
-   
+                </div>
+                <div class="card" style="width: 10%" class="card-body">
+                    <h3 class="card-title" id="3-date">Date Va</h3>
+                    <!-- <div class="weather-icon"><img src="icons/unknown.png" /></div> -->
+                    <p class="card-text"></p>
+                    <p>Temperature:<span id="3-temp"></span> </p>
+                    <p>Humidity:<span id="3-humidity"></span> </p>
+                    <p>Wind Speed:<span id="3-speed"></span> </p>
+                    <p>Weather:<span id="3-weather"></span> </p>
 
+                </div>
+                <div class="card" style="width: 10%" class="card-body">
+                    <h3 class="card-title" id="4-date">Date Va</h3>
+                    <!-- <div class="weather-icon"><img src="icons/unknown.png" /></div> -->
+                    <p class="card-text"></p>
+                    <p>Temperature:<span id="4-temp"></span> </p>
+                    <p>Humidity:<span id="4-humidity"></span> </p>
+                    <p>Wind Speed:<span id="4-speed"></span> </p>
+                    <p>Weather:<span id="4-weather"></span> </p>
 
+                </div>
 
+                <div class="card" style="width: 10%" class="card-body">
+                    <h3 class="card-title" id="5-date">Date Va</h3>
+                    <!-- <div class="weather-icon"><img src="icons/unknown.png" /></div> -->
+                    <p class="card-text"></p>
+                    <p>Temperature:<span id="5-temp"></span> </p>
+                    <p>Humidity:<span id="5-humidity"></span> </p>
+                    <p>Wind Speed:<span id="5-speed"></span> </p>
+                    <p>Weather:<span id="5-weather"></span> </p>
 
-         
+                </div>
 
+            </container>
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script src="script.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+
 </body>
 
 </html>
