@@ -3,6 +3,7 @@ var queryURL = "https://api.openweathermap.org/data/2.5/forecast?id=524901&APPID
 
 
 $(document).ready(function () {
+    $("#userSearch").text(localStorage.getItem("city"))
     // once the user clicks on search, then call the api for weather data
     $('#userInput').click(function () {
         var city = $('#city').val();
@@ -10,6 +11,7 @@ $(document).ready(function () {
         if (city != '') {
             FivedayForecast(city)
             showData(city)
+            localStorage.setItem("city", city)
         } else {
             $('#error').html('Field cannot be blank');
 
@@ -63,6 +65,7 @@ $(document).ready(function () {
             });
 
         })
+// create a sep function to call the unsplash api and return a city image based on user input
 
         // $('.city').html("<h1>" + response.name + "Weather Details</h1>");
         // $('.wind').text("Wind Speed: " + response.wind.speed);
