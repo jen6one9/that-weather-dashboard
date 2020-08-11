@@ -10,7 +10,7 @@ As a traveler, I want to see the weather outlook for multiple cities so that I c
 
 
 ## Preview
-![alt-text](readme.xxx)
+![alt-text](WeatherDashboard.GIF)
 
 ## Deployed Site Link
 Here's the link to my app:   
