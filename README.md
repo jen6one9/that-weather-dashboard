@@ -13,7 +13,7 @@ As a traveler, I want to see the weather outlook for multiple cities so that I c
 ![alt-text](WeatherDashboard.GIF)
 
 ## Deployed Site Link
-Here's the link to my app:   
+Here's the link to my app: https://jen6one9.github.io/that-weather-dashboard/
 
 ## Acknowledgements
 This successful launch of this application was made possible through the support of my tutor and cohort peers. In addition, I would to acknowledge Erik for his eagle eyes and solid feedback as well and unsplash.com. 
